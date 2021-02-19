@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_drawable">
+
+    <ImageView
+        android:id="@+id/i_view"
+        android:layout_width="137dp"
+        android:layout_height="105dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
+        android:src="@drawable/logos"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/i_view2"
+        android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/i_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="119dp"
+        android:text="     Sparks Foundation"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:src="@drawable/asd"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="BASIC"
+        android:textAllCaps="false"
+        android:textColor="#3700B3"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:visibility="invisible"></TextView>
+    <TextView
+        android:id="@+id/app_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:text="BANKING SYSTEM"
+        android:textAllCaps="false"
+        android:textColor="#3700B3"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:visibility="invisible"></TextView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/designed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  Designed by "
+            android:textColor="#3700B3"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="invisible"></TextView>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:fontFamily="@font/lobsterwwo_bold"
+            android:text="@string/sankalp_agarwal"
+            android:textColor="#3700B3"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:visibility="invisible"></TextView>
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
