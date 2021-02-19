@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         view_users.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 loadingDialog.startLoadingDialog();
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {

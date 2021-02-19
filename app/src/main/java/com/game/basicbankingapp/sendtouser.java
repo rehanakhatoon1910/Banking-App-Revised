@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,7 +37,6 @@ public class sendtouser extends AppCompatActivity {
     String selectuser_phonenumber, selectuser_name, selectuser_balance, date;
     ImageView tick;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +61,6 @@ public class sendtouser extends AppCompatActivity {
             showData(phonenumber);
         }
     }
-
     private void showData(String phonenumber) {
         modelList_sendtouser.clear();
         Log.d("DEMO",phonenumber);
@@ -83,7 +82,6 @@ public class sendtouser extends AppCompatActivity {
         adapter = new CustomeAdapter_sendtouser(sendtouser.this, modelList_sendtouser);
         mRecyclerView.setAdapter(adapter);
     }
-
     public void selectuser(int position) {
         selectuser_phonenumber = modelList_sendtouser.get(position).getPhoneno();
         Cursor cursor = new DatabaseHelper(this).readparticulardata(selectuser_phonenumber);
@@ -97,13 +95,21 @@ public class sendtouser extends AppCompatActivity {
             new DatabaseHelper(this).insertTransferData(date, name, selectuser_name, transferamount, "Success");
             new DatabaseHelper(this).updateAmount(selectuser_phonenumber, Dselectuser_remainingamount.toString());
             calculateAmount();
-            tick.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "Transaction Successful!", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(sendtouser.this, user_list.class));
-            finish();
+            final LoadingDialog2 loadingDialog = new LoadingDialog2(sendtouser.this);
+            loadingDialog.startLoadingDialog();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    loadingDialog.dismissDialog();
+                    Toast.makeText(sendtouser.this, "Transaction Successfully Completed!", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(sendtouser.this, user_list.class));
+                    finish();
+                }
+            },3000);
+
         }
     }
-
     private void calculateAmount() {
         Double Dcurrentamount = Double.parseDouble(currentamount);
         Double Dtransferamount = Double.parseDouble(transferamount);
@@ -111,7 +117,6 @@ public class sendtouser extends AppCompatActivity {
         remainingamount = Dremainingamount.toString();
         new DatabaseHelper(this).updateAmount(phonenumber, remainingamount);
     }
-
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder_exitbutton = new AlertDialog.Builder(sendtouser.this);
