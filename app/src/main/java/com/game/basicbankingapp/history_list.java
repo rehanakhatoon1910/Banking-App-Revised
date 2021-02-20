@@ -1,14 +1,10 @@
 package com.game.basicbankingapp;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,17 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class history_list extends AppCompatActivity {
-    List<Model> modelList_historylist = new ArrayList<>();
+    List<cstomr_model> cstomrmodelList_historylist = new ArrayList<>();
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager layoutManager;
-    CustomeAdapter_history adapter;
+    adapter_History adapter;
 
     TextView history_empty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transfer_history);
+        setContentView(R.layout.activity_trnsfr_history);
 
         mRecyclerView = findViewById(R.id.recyclerview);
         mRecyclerView.setHasFixedSize(true);
@@ -41,8 +37,8 @@ public class history_list extends AppCompatActivity {
     }
 
     private void showData() {
-        modelList_historylist.clear();
-        Cursor cursor = new DatabaseHelper(this).readtransferdata();
+        cstomrmodelList_historylist.clear();
+        Cursor cursor = new myDBHelper(this).readtransferdata();
 
         while (cursor.moveToNext()) {
             String balancefromdb = cursor.getString(4);
@@ -54,14 +50,14 @@ public class history_list extends AppCompatActivity {
             nf.setMinimumFractionDigits(2);
             String price = nf.format(balance);
 
-            Model model = new Model(cursor.getString(2), cursor.getString(3), price, cursor.getString(1), cursor.getString(5));
-            modelList_historylist.add(model);
+            cstomr_model cstomrmodel = new cstomr_model(cursor.getString(2), cursor.getString(3), price, cursor.getString(1), cursor.getString(5));
+            cstomrmodelList_historylist.add(cstomrmodel);
         }
 
-        adapter = new CustomeAdapter_history(history_list.this, modelList_historylist);
+        adapter = new adapter_History(history_list.this, cstomrmodelList_historylist);
         mRecyclerView.setAdapter(adapter);
 
-        if(modelList_historylist.size() == 0){
+        if(cstomrmodelList_historylist.size() == 0){
             history_empty.setVisibility(View.VISIBLE);
         }
 

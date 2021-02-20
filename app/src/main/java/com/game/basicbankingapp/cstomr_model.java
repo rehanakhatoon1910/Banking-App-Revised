@@ -1,18 +1,18 @@
 package com.game.basicbankingapp;
 
-public class Model {
+public class cstomr_model {
     String phoneno, name, balance, name1, name2, date, transaction_status;
 
-    public Model() {
+    public cstomr_model() {
     }
 
-    public Model(String phoneno, String name, String balance) {
+    public cstomr_model(String phoneno, String name, String balance) {
         this.phoneno = phoneno;
         this.name = name;
         this.balance = balance;
     }
 
-    public Model(String name1, String name2, String balance, String date, String transaction_status) {
+    public cstomr_model(String name1, String name2, String balance, String date, String transaction_status) {
         this.name1 = name1;
         this.name2 = name2;
         this.balance = balance;

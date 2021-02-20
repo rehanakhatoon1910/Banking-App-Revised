@@ -31,7 +31,7 @@ public class user_data extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userdata);
+        setContentView(R.layout.user_data);
 
         name = findViewById(R.id.username);
         phoneNumber = findViewById(R.id.userphonenumber);
@@ -60,7 +60,7 @@ public class user_data extends AppCompatActivity {
     }
 
     private void showData(String phonenumber) {
-        Cursor cursor = new DatabaseHelper(this).readparticulardata(phonenumber);
+        Cursor cursor = new myDBHelper(this).readparticulardata(phonenumber);
         while(cursor.moveToNext()) {
             String balancefromdb = cursor.getString(2);
             newbalance = Double.parseDouble(balancefromdb);
@@ -85,7 +85,7 @@ public class user_data extends AppCompatActivity {
 
     private void enterAmount() {
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(user_data.this);
-        View mView = getLayoutInflater().inflate(R.layout.activity_transfer_money, null);
+        View mView = getLayoutInflater().inflate(R.layout.activity_trnsfrmoney, null);
         mBuilder.setTitle("Enter amount").setView(mView).setCancelable(false);
 
         final EditText mAmount = (EditText) mView.findViewById(R.id.enter_money);
@@ -112,7 +112,7 @@ public class user_data extends AppCompatActivity {
                 }else if(Double.parseDouble(mAmount.getText().toString()) > newbalance){
                     mAmount.setError("Your account don't have enough balance");
                 }else{
-                    Intent intent = new Intent(user_data.this, sendtouser.class);
+                    Intent intent = new Intent(user_data.this, send2user.class);
                     intent.putExtra("phonenumber", phoneNumber.getText().toString());
                     intent.putExtra("name", name.getText().toString());
                     intent.putExtra("currentamount", newbalance.toString());
@@ -135,7 +135,7 @@ public class user_data extends AppCompatActivity {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy, hh:mm a");
                         String date = simpleDateFormat.format(calendar.getTime());
 
-                        new DatabaseHelper(user_data.this).insertTransferData(date, name.getText().toString(), "Not selected", "0", "Failed");
+                        new myDBHelper(user_data.this).insertTransferData(date, name.getText().toString(), "Not selected", "0", "Failed");
                         Toast.makeText(user_data.this, "Transaction Cancelled!", Toast.LENGTH_LONG).show();
                     }
                 }).setNegativeButton("No", new DialogInterface.OnClickListener() {

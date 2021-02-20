@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme_white">
         <activity
-            android:name=".splash_screen"
+            android:name=".screen1"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -35,7 +35,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".sendtouser"
+            android:name=".send2user"
             android:label="Transfer Money"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

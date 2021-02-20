@@ -7,13 +7,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ViewHolder extends RecyclerView.ViewHolder {
+public class view_holder extends RecyclerView.ViewHolder {
 
     TextView mName, mPhonenumber, mBalance, mRupee, mRupeeslash, mName1, mName2, mDate, mTransc_status;
     ImageView mPhone, mArrow;
     View mView;
 
-    public ViewHolder(@NonNull View itemView) {
+    public view_holder(@NonNull View itemView) {
         super(itemView);
         mView = itemView;
 
@@ -37,12 +37,12 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         });
 
     }
-    private ViewHolder.ClickListener mClickListener;
+    private view_holder.ClickListener mClickListener;
     public interface  ClickListener{
         void onItemClick(View view, int position);
     }
 
-    public void setOnClickListener(ViewHolder.ClickListener clickListener){
+    public void setOnClickListener(view_holder.ClickListener clickListener){
         mClickListener = clickListener;
     }
 }

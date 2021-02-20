@@ -9,7 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class splash_screen extends Activity {
+public class screen1 extends Activity {
 
     TextView designed, name, app_name,app_name1,i_view2;
     ImageView logo, i_view;
@@ -17,7 +17,7 @@ public class splash_screen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_screen);
+        setContentView(R.layout.screen1);
 
         logo = findViewById(R.id.logo);
         designed = findViewById(R.id.designed);
@@ -45,11 +45,11 @@ public class splash_screen extends Activity {
     }
 
     private void startEnterAnimation() {
-        i_view.startAnimation(AnimationUtils.loadAnimation(splash_screen.this, R.anim.top));
-        i_view2.startAnimation(AnimationUtils.loadAnimation(splash_screen.this, R.anim.fade));
-        app_name.startAnimation(AnimationUtils.loadAnimation(splash_screen.this, R.anim.bottom));
-        app_name1.startAnimation(AnimationUtils.loadAnimation(splash_screen.this, R.anim.bottom));
-        logo.startAnimation(AnimationUtils.loadAnimation(splash_screen.this, R.anim.bottom));
+        i_view.startAnimation(AnimationUtils.loadAnimation(screen1.this, R.anim.top));
+        i_view2.startAnimation(AnimationUtils.loadAnimation(screen1.this, R.anim.fade));
+        app_name.startAnimation(AnimationUtils.loadAnimation(screen1.this, R.anim.bottom));
+        app_name1.startAnimation(AnimationUtils.loadAnimation(screen1.this, R.anim.bottom));
+        logo.startAnimation(AnimationUtils.loadAnimation(screen1.this, R.anim.bottom));
 
         logo.setVisibility(View.VISIBLE);
         designed.setVisibility(View.VISIBLE);

@@ -8,11 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class myDBHelper extends SQLiteOpenHelper {
     private String TABLE_NAME = "user_table";
     private String TABLE_NAME1 = "transfers_table";
 
-    public DatabaseHelper(@Nullable Context context) {
+    public myDBHelper(@Nullable Context context) {
         super(context, "User.db", null, 1);
     }
 
