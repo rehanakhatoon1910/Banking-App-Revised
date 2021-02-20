@@ -54,7 +54,7 @@ public class adapter_History extends RecyclerView.Adapter<view_holder> {
         if(cstomrmodelList.get(position).getTransaction_status().equals("Failed!!!")){
             holder.mTransc_status.setTextColor(Color.parseColor("#FF0000"));
         }else{
-            holder.mTransc_status.setTextColor(Color.parseColor("#3700B3"));
+            holder.mTransc_status.setTextColor(Color.RED);
         }
     }
 
