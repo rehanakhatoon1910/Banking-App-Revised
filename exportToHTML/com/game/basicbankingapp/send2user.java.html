@@ -1,0 +1,183 @@
+<html>
+<head>
+<title>send2user.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ed864a;}
+.s1 { color: #ebebeb;}
+.s2 { color: #ed864a; font-weight: bold;}
+.s3 { color: #54b33e;}
+.s4 { color: #33ccff; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+send2user.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.game.basicbankingapp</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android.content.DialogInterface</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.database.Cursor</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.os.Handler</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.util.Log</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.view.Menu</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.view.MenuItem</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.widget.SearchView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AlertDialog</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx.core.view.MenuItemCompat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.LinearLayoutManager</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.RecyclerView</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java.text.NumberFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java.text.SimpleDateFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java.util.Calendar</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">send2user </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+
+    <span class="s1">List&lt;cstomr_model&gt; cstomrmodelList_sendtouser = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s2">;</span>
+    <span class="s1">RecyclerView mRecyclerView</span><span class="s2">;</span>
+    <span class="s1">RecyclerView.LayoutManager layoutManager</span><span class="s2">;</span>
+    <span class="s1">myAdapter_SendToUser adapter</span><span class="s2">;</span>
+
+    <span class="s1">String phonenumber</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">currentamount</span><span class="s2">, </span><span class="s1">transferamount</span><span class="s2">, </span><span class="s1">remainingamount</span><span class="s2">;</span>
+    <span class="s1">String selectuser_phonenumber</span><span class="s2">, </span><span class="s1">selectuser_name</span><span class="s2">, </span><span class="s1">selectuser_balance</span><span class="s2">, </span><span class="s1">date</span><span class="s2">;</span>
+    <span class="s1">ImageView tick</span><span class="s2">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s2">;</span>
+        <span class="s1">setContentView(R.layout.sendtouser)</span><span class="s2">;</span>
+
+        <span class="s1">mRecyclerView = findViewById(R.id.recyclerview)</span><span class="s2">;</span>
+        <span class="s1">tick = findViewById(R.id.tick)</span><span class="s2">;</span>
+        <span class="s1">mRecyclerView.setHasFixedSize(</span><span class="s0">true</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">layoutManager = </span><span class="s0">new </span><span class="s1">LinearLayoutManager(</span><span class="s0">this</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">mRecyclerView.setLayoutManager(layoutManager)</span><span class="s2">;</span>
+
+        <span class="s1">Calendar calendar = Calendar.getInstance()</span><span class="s2">;</span>
+        <span class="s1">SimpleDateFormat simpleDateFormat = </span><span class="s0">new </span><span class="s1">SimpleDateFormat(</span><span class="s3">&quot;dd-MMM-yyyy, hh:mm a&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">date = simpleDateFormat.format(calendar.getTime())</span><span class="s2">;</span>
+
+        <span class="s1">Bundle bundle = getIntent().getExtras()</span><span class="s2">;</span>
+        <span class="s0">if</span><span class="s1">(bundle != </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">phonenumber = bundle.getString(</span><span class="s3">&quot;phonenumber&quot;</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">name = bundle.getString(</span><span class="s3">&quot;name&quot;</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">currentamount = bundle.getString(</span><span class="s3">&quot;currentamount&quot;</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">transferamount = bundle.getString(</span><span class="s3">&quot;transferamount&quot;</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">showData(phonenumber)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s0">private void </span><span class="s1">showData(String phonenumber) {</span>
+        <span class="s1">cstomrmodelList_sendtouser.clear()</span><span class="s2">;</span>
+        <span class="s1">Log.d(</span><span class="s3">&quot;DEMO&quot;</span><span class="s2">,</span><span class="s1">phonenumber)</span><span class="s2">;</span>
+        <span class="s1">Cursor cursor = </span><span class="s0">new </span><span class="s1">myDBHelper(</span><span class="s0">this</span><span class="s1">).readselectuserdata(phonenumber)</span><span class="s2">;</span>
+        <span class="s0">while</span><span class="s1">(cursor.moveToNext()){</span>
+            <span class="s1">String balancefromdb = cursor.getString(</span><span class="s4">2</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">Double balance = Double.parseDouble(balancefromdb)</span><span class="s2">;</span>
+
+            <span class="s1">NumberFormat nf = NumberFormat.getNumberInstance()</span><span class="s2">;</span>
+            <span class="s1">nf.setGroupingUsed(</span><span class="s0">true</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">nf.setMaximumFractionDigits(</span><span class="s4">2</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">nf.setMinimumFractionDigits(</span><span class="s4">2</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">String price = nf.format(balance)</span><span class="s2">;</span>
+
+            <span class="s1">cstomr_model cstomrmodel = </span><span class="s0">new </span><span class="s1">cstomr_model(cursor.getString(</span><span class="s4">0</span><span class="s1">)</span><span class="s2">, </span><span class="s1">cursor.getString(</span><span class="s4">1</span><span class="s1">)</span><span class="s2">, </span><span class="s1">price)</span><span class="s2">;</span>
+            <span class="s1">cstomrmodelList_sendtouser.add(cstomrmodel)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">adapter = </span><span class="s0">new </span><span class="s1">myAdapter_SendToUser(send2user.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">cstomrmodelList_sendtouser)</span><span class="s2">;</span>
+        <span class="s1">mRecyclerView.setAdapter(adapter)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+    <span class="s0">public void </span><span class="s1">selectuser(</span><span class="s0">int </span><span class="s1">position) {</span>
+        <span class="s1">selectuser_phonenumber = cstomrmodelList_sendtouser.get(position).getPhoneno()</span><span class="s2">;</span>
+        <span class="s1">Cursor cursor = </span><span class="s0">new </span><span class="s1">myDBHelper(</span><span class="s0">this</span><span class="s1">).readparticulardata(selectuser_phonenumber)</span><span class="s2">;</span>
+        <span class="s0">while</span><span class="s1">(cursor.moveToNext()) {</span>
+            <span class="s1">selectuser_name = cursor.getString(</span><span class="s4">1</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">selectuser_balance = cursor.getString(</span><span class="s4">2</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">Double Dselectuser_balance = Double.parseDouble(selectuser_balance)</span><span class="s2">;</span>
+            <span class="s1">Double Dselectuser_transferamount = Double.parseDouble(transferamount)</span><span class="s2">;</span>
+            <span class="s1">Double Dselectuser_remainingamount = Dselectuser_balance + Dselectuser_transferamount</span><span class="s2">;</span>
+
+            <span class="s0">new </span><span class="s1">myDBHelper(</span><span class="s0">this</span><span class="s1">).insertTransferData(date</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">selectuser_name</span><span class="s2">, </span><span class="s1">transferamount</span><span class="s2">, </span><span class="s3">&quot;Success&quot;</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s0">new </span><span class="s1">myDBHelper(</span><span class="s0">this</span><span class="s1">).updateAmount(selectuser_phonenumber</span><span class="s2">, </span><span class="s1">Dselectuser_remainingamount.toString())</span><span class="s2">;</span>
+            <span class="s1">calculateAmount()</span><span class="s2">;</span>
+            <span class="s0">final </span><span class="s1">LoadingDialog2 loadingDialog = </span><span class="s0">new </span><span class="s1">LoadingDialog2(send2user.</span><span class="s0">this</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">loadingDialog.startLoadingDialog()</span><span class="s2">;</span>
+            <span class="s1">Handler handler = </span><span class="s0">new </span><span class="s1">Handler()</span><span class="s2">;</span>
+            <span class="s1">handler.postDelayed(</span><span class="s0">new </span><span class="s1">Runnable() {</span>
+                <span class="s1">@Override</span>
+                <span class="s0">public void </span><span class="s1">run() {</span>
+                    <span class="s1">loadingDialog.dismissDialog()</span><span class="s2">;</span>
+                    <span class="s1">Toast.makeText(send2user.</span><span class="s0">this</span><span class="s2">, </span><span class="s3">&quot;Transaction Successfully Completed!&quot;</span><span class="s2">, </span><span class="s1">Toast.LENGTH_LONG).show()</span><span class="s2">;</span>
+                    <span class="s1">startActivity(</span><span class="s0">new </span><span class="s1">Intent(send2user.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">user_list.</span><span class="s0">class</span><span class="s1">))</span><span class="s2">;</span>
+                    <span class="s1">finish()</span><span class="s2">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span><span class="s2">,</span><span class="s4">3000</span><span class="s1">)</span><span class="s2">;</span>
+
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s0">private void </span><span class="s1">calculateAmount() {</span>
+        <span class="s1">Double Dcurrentamount = Double.parseDouble(currentamount)</span><span class="s2">;</span>
+        <span class="s1">Double Dtransferamount = Double.parseDouble(transferamount)</span><span class="s2">;</span>
+        <span class="s1">Double Dremainingamount = Dcurrentamount - Dtransferamount</span><span class="s2">;</span>
+        <span class="s1">remainingamount = Dremainingamount.toString()</span><span class="s2">;</span>
+        <span class="s0">new </span><span class="s1">myDBHelper(</span><span class="s0">this</span><span class="s1">).updateAmount(phonenumber</span><span class="s2">, </span><span class="s1">remainingamount)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onBackPressed() {</span>
+        <span class="s1">AlertDialog.Builder builder_exitbutton = </span><span class="s0">new </span><span class="s1">AlertDialog.Builder(send2user.</span><span class="s0">this</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">builder_exitbutton.setTitle(</span><span class="s3">&quot;Do you want to cancel the transaction?&quot;</span><span class="s1">).setCancelable(</span><span class="s0">false</span><span class="s1">)</span>
+                <span class="s1">.setPositiveButton(</span><span class="s3">&quot;yes&quot;</span><span class="s2">, </span><span class="s0">new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onClick(DialogInterface dialogInterface</span><span class="s2">, </span><span class="s0">int </span><span class="s1">i) {</span>
+                        <span class="s0">new </span><span class="s1">myDBHelper(send2user.</span><span class="s0">this</span><span class="s1">).insertTransferData(date</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s3">&quot;Not selected&quot;</span><span class="s2">, </span><span class="s1">transferamount</span><span class="s2">, </span><span class="s3">&quot;Failed&quot;</span><span class="s1">)</span><span class="s2">;</span>
+                        <span class="s1">Toast.makeText(send2user.</span><span class="s0">this</span><span class="s2">, </span><span class="s3">&quot;Transaction Cancelled!&quot;</span><span class="s2">, </span><span class="s1">Toast.LENGTH_LONG).show()</span><span class="s2">;</span>
+                        <span class="s1">startActivity(</span><span class="s0">new </span><span class="s1">Intent(send2user.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">user_list.</span><span class="s0">class</span><span class="s1">))</span><span class="s2">;</span>
+                        <span class="s1">finish()</span><span class="s2">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}).setNegativeButton(</span><span class="s3">&quot;No&quot;</span><span class="s2">, </span><span class="s0">null</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">AlertDialog alertexit = builder_exitbutton.create()</span><span class="s2">;</span>
+        <span class="s1">alertexit.show()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public boolean </span><span class="s1">onCreateOptionsMenu(Menu menu) {</span>
+        <span class="s1">getMenuInflater().inflate(R.menu.menu</span><span class="s2">, </span><span class="s1">menu)</span><span class="s2">;</span>
+        <span class="s1">MenuItem search = menu.findItem(R.id.action_search)</span><span class="s2">;</span>
+        <span class="s1">android.widget.SearchView searchView = (android.widget.SearchView) MenuItemCompat.getActionView(search)</span><span class="s2">;</span>
+        <span class="s1">searchView.setOnQueryTextListener(</span><span class="s0">new </span><span class="s1">SearchView.OnQueryTextListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public boolean </span><span class="s1">onQueryTextSubmit(String query) {</span>
+                <span class="s0">return false</span><span class="s2">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public boolean </span><span class="s1">onQueryTextChange(String newText) {</span>
+                <span class="s1">newText = newText.toLowerCase()</span><span class="s2">;</span>
+                <span class="s1">ArrayList&lt;cstomr_model&gt; newList = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s2">;</span>
+                <span class="s0">for</span><span class="s1">(cstomr_model cstomrmodel : cstomrmodelList_sendtouser){</span>
+                    <span class="s1">String name = cstomrmodel.getName().toLowerCase()</span><span class="s2">;</span>
+                    <span class="s0">if</span><span class="s1">(name.contains(newText)){</span>
+                        <span class="s1">newList.add(cstomrmodel)</span><span class="s2">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+                <span class="s1">adapter.setFilter(newList)</span><span class="s2">;</span>
+                <span class="s0">return true</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s2">;</span>
+        <span class="s0">return super</span><span class="s1">.onCreateOptionsMenu(menu)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

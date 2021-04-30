@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>history_list.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ed864a;}
+.s1 { color: #ebebeb;}
+.s2 { color: #ed864a; font-weight: bold;}
+.s3 { color: #33ccff; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+history_list.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.game.basicbankingapp</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android.database.Cursor</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.LinearLayoutManager</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.RecyclerView</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java.text.NumberFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">history_list </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+    <span class="s1">List&lt;cstomr_model&gt; cstomrmodelList_historylist = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;()</span><span class="s2">;</span>
+    <span class="s1">RecyclerView mRecyclerView</span><span class="s2">;</span>
+    <span class="s1">RecyclerView.LayoutManager layoutManager</span><span class="s2">;</span>
+    <span class="s1">adapter_History adapter</span><span class="s2">;</span>
+
+    <span class="s1">TextView history_empty</span><span class="s2">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s2">;</span>
+        <span class="s1">setContentView(R.layout.activity_trnsfr_history)</span><span class="s2">;</span>
+
+        <span class="s1">mRecyclerView = findViewById(R.id.recyclerview)</span><span class="s2">;</span>
+        <span class="s1">mRecyclerView.setHasFixedSize(</span><span class="s0">true</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">layoutManager = </span><span class="s0">new </span><span class="s1">LinearLayoutManager(</span><span class="s0">this</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">mRecyclerView.setLayoutManager(layoutManager)</span><span class="s2">;</span>
+
+        <span class="s1">history_empty = findViewById(R.id.empty_text)</span><span class="s2">;</span>
+
+        <span class="s1">showData()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">showData() {</span>
+        <span class="s1">cstomrmodelList_historylist.clear()</span><span class="s2">;</span>
+        <span class="s1">Cursor cursor = </span><span class="s0">new </span><span class="s1">myDBHelper(</span><span class="s0">this</span><span class="s1">).readtransferdata()</span><span class="s2">;</span>
+
+        <span class="s0">while </span><span class="s1">(cursor.moveToNext()) {</span>
+            <span class="s1">String balancefromdb = cursor.getString(</span><span class="s3">4</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">Double balance = Double.parseDouble(balancefromdb)</span><span class="s2">;</span>
+
+            <span class="s1">NumberFormat nf = NumberFormat.getNumberInstance()</span><span class="s2">;</span>
+            <span class="s1">nf.setGroupingUsed(</span><span class="s0">true</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">nf.setMaximumFractionDigits(</span><span class="s3">2</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">nf.setMinimumFractionDigits(</span><span class="s3">2</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">String price = nf.format(balance)</span><span class="s2">;</span>
+
+            <span class="s1">cstomr_model cstomrmodel = </span><span class="s0">new </span><span class="s1">cstomr_model(cursor.getString(</span><span class="s3">2</span><span class="s1">)</span><span class="s2">, </span><span class="s1">cursor.getString(</span><span class="s3">3</span><span class="s1">)</span><span class="s2">, </span><span class="s1">price</span><span class="s2">, </span><span class="s1">cursor.getString(</span><span class="s3">1</span><span class="s1">)</span><span class="s2">, </span><span class="s1">cursor.getString(</span><span class="s3">5</span><span class="s1">))</span><span class="s2">;</span>
+            <span class="s1">cstomrmodelList_historylist.add(cstomrmodel)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">adapter = </span><span class="s0">new </span><span class="s1">adapter_History(history_list.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">cstomrmodelList_historylist)</span><span class="s2">;</span>
+        <span class="s1">mRecyclerView.setAdapter(adapter)</span><span class="s2">;</span>
+
+        <span class="s0">if</span><span class="s1">(cstomrmodelList_historylist.size() == </span><span class="s3">0</span><span class="s1">){</span>
+            <span class="s1">history_empty.setVisibility(View.VISIBLE)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

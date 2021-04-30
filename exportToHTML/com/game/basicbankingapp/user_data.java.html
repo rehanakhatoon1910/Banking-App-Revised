@@ -1,0 +1,174 @@
+<html>
+<head>
+<title>user_data.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ed864a;}
+.s1 { color: #ebebeb;}
+.s2 { color: #ed864a; font-weight: bold;}
+.s3 { color: #54b33e;}
+.s4 { color: #33ccff; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+user_data.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.game.basicbankingapp</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android.app.ProgressDialog</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.content.DialogInterface</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.database.Cursor</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.widget.EditText</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AlertDialog</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java.text.NumberFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java.text.SimpleDateFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java.util.Calendar</span><span class="s2">;</span>
+
+
+<span class="s0">public class </span><span class="s1">user_data </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+
+    <span class="s1">ProgressDialog progressDialog</span><span class="s2">;</span>
+    <span class="s1">String phonenumber</span><span class="s2">;</span>
+    <span class="s1">Double newbalance</span><span class="s2">;</span>
+    <span class="s1">TextView name</span><span class="s2">, </span><span class="s1">phoneNumber</span><span class="s2">, </span><span class="s1">email</span><span class="s2">, </span><span class="s1">account_no</span><span class="s2">, </span><span class="s1">ifsc_code</span><span class="s2">, </span><span class="s1">balance</span><span class="s2">;</span>
+    <span class="s1">Button transfer_button</span><span class="s2">;</span>
+    <span class="s1">AlertDialog dialog</span><span class="s2">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s2">;</span>
+        <span class="s1">setContentView(R.layout.user_data)</span><span class="s2">;</span>
+
+        <span class="s1">name = findViewById(R.id.username)</span><span class="s2">;</span>
+        <span class="s1">phoneNumber = findViewById(R.id.userphonenumber)</span><span class="s2">;</span>
+        <span class="s1">email = findViewById(R.id.email)</span><span class="s2">;</span>
+        <span class="s1">account_no = findViewById(R.id.account_no)</span><span class="s2">;</span>
+        <span class="s1">ifsc_code = findViewById(R.id.ifsc_code)</span><span class="s2">;</span>
+        <span class="s1">balance = findViewById(R.id.balance)</span><span class="s2">;</span>
+        <span class="s1">transfer_button = findViewById(R.id.transfer_button)</span><span class="s2">;</span>
+
+        <span class="s1">progressDialog = </span><span class="s0">new </span><span class="s1">ProgressDialog(user_data.</span><span class="s0">this</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">progressDialog.setTitle(</span><span class="s3">&quot;Loading data...&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">progressDialog.show()</span><span class="s2">;</span>
+
+        <span class="s1">Bundle bundle = getIntent().getExtras()</span><span class="s2">;</span>
+        <span class="s0">if</span><span class="s1">(bundle != </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">phonenumber = bundle.getString(</span><span class="s3">&quot;phonenumber&quot;</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">showData(phonenumber)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">transfer_button.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View v) {</span>
+                <span class="s1">enterAmount()</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">showData(String phonenumber) {</span>
+        <span class="s1">Cursor cursor = </span><span class="s0">new </span><span class="s1">myDBHelper(</span><span class="s0">this</span><span class="s1">).readparticulardata(phonenumber)</span><span class="s2">;</span>
+        <span class="s0">while</span><span class="s1">(cursor.moveToNext()) {</span>
+            <span class="s1">String balancefromdb = cursor.getString(</span><span class="s4">2</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">newbalance = Double.parseDouble(balancefromdb)</span><span class="s2">;</span>
+
+            <span class="s1">NumberFormat nf = NumberFormat.getNumberInstance()</span><span class="s2">;</span>
+            <span class="s1">nf.setGroupingUsed(</span><span class="s0">true</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">nf.setMaximumFractionDigits(</span><span class="s4">2</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">nf.setMinimumFractionDigits(</span><span class="s4">2</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">String price = nf.format(newbalance)</span><span class="s2">;</span>
+
+            <span class="s1">progressDialog.dismiss()</span><span class="s2">;</span>
+
+            <span class="s1">phoneNumber.setText(cursor.getString(</span><span class="s4">0</span><span class="s1">))</span><span class="s2">;</span>
+            <span class="s1">name.setText(cursor.getString(</span><span class="s4">1</span><span class="s1">))</span><span class="s2">;</span>
+            <span class="s1">email.setText(cursor.getString(</span><span class="s4">3</span><span class="s1">))</span><span class="s2">;</span>
+            <span class="s1">balance.setText(price)</span><span class="s2">;</span>
+            <span class="s1">account_no.setText(cursor.getString(</span><span class="s4">4</span><span class="s1">))</span><span class="s2">;</span>
+            <span class="s1">ifsc_code.setText(cursor.getString(</span><span class="s4">5</span><span class="s1">))</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">enterAmount() {</span>
+        <span class="s0">final </span><span class="s1">AlertDialog.Builder mBuilder = </span><span class="s0">new </span><span class="s1">AlertDialog.Builder(user_data.</span><span class="s0">this</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">View mView = getLayoutInflater().inflate(R.layout.activity_trnsfrmoney</span><span class="s2">, </span><span class="s0">null</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">mBuilder.setTitle(</span><span class="s3">&quot;Enter amount&quot;</span><span class="s1">).setView(mView).setCancelable(</span><span class="s0">false</span><span class="s1">)</span><span class="s2">;</span>
+
+        <span class="s0">final </span><span class="s1">EditText mAmount = (EditText) mView.findViewById(R.id.enter_money)</span><span class="s2">;</span>
+
+        <span class="s1">mBuilder.setPositiveButton(</span><span class="s3">&quot;SEND&quot;</span><span class="s2">, </span><span class="s0">new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(DialogInterface dialogInterface</span><span class="s2">, </span><span class="s0">int </span><span class="s1">i) {</span>
+            <span class="s1">}</span>
+        <span class="s1">}).setNegativeButton(</span><span class="s3">&quot;CANCEL&quot;</span><span class="s2">, </span><span class="s0">new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(DialogInterface dialog</span><span class="s2">, </span><span class="s0">int </span><span class="s1">which) {</span>
+                <span class="s1">dialog.dismiss()</span><span class="s2">;</span>
+                <span class="s1">transactionCancel()</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s2">;</span>
+
+        <span class="s1">dialog = mBuilder.create()</span><span class="s2">;</span>
+        <span class="s1">dialog.show()</span><span class="s2">;</span>
+        <span class="s1">dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                <span class="s0">if</span><span class="s1">(mAmount.getText().toString().isEmpty()){</span>
+                    <span class="s1">mAmount.setError(</span><span class="s3">&quot;Amount can't be empty&quot;</span><span class="s1">)</span><span class="s2">;</span>
+                <span class="s1">}</span><span class="s0">else if</span><span class="s1">(Double.parseDouble(mAmount.getText().toString()) &gt; newbalance){</span>
+                    <span class="s1">mAmount.setError(</span><span class="s3">&quot;Your account don't have enough balance&quot;</span><span class="s1">)</span><span class="s2">;</span>
+                <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                    <span class="s1">Intent intent = </span><span class="s0">new </span><span class="s1">Intent(user_data.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">send2user.</span><span class="s0">class</span><span class="s1">)</span><span class="s2">;</span>
+                    <span class="s1">intent.putExtra(</span><span class="s3">&quot;phonenumber&quot;</span><span class="s2">, </span><span class="s1">phoneNumber.getText().toString())</span><span class="s2">;</span>
+                    <span class="s1">intent.putExtra(</span><span class="s3">&quot;name&quot;</span><span class="s2">, </span><span class="s1">name.getText().toString())</span><span class="s2">;</span>
+                    <span class="s1">intent.putExtra(</span><span class="s3">&quot;currentamount&quot;</span><span class="s2">, </span><span class="s1">newbalance.toString())</span><span class="s2">;</span>
+                    <span class="s1">intent.putExtra(</span><span class="s3">&quot;transferamount&quot;</span><span class="s2">, </span><span class="s1">mAmount.getText().toString())</span><span class="s2">;</span>
+                    <span class="s1">startActivity(intent)</span><span class="s2">;</span>
+                    <span class="s1">finish()</span><span class="s2">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">transactionCancel() {</span>
+        <span class="s1">AlertDialog.Builder builder_exitbutton = </span><span class="s0">new </span><span class="s1">AlertDialog.Builder(user_data.</span><span class="s0">this</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">builder_exitbutton.setTitle(</span><span class="s3">&quot;Do you want to cancel the transaction?&quot;</span><span class="s1">).setCancelable(</span><span class="s0">false</span><span class="s1">)</span>
+                <span class="s1">.setPositiveButton(</span><span class="s3">&quot;yes&quot;</span><span class="s2">, </span><span class="s0">new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onClick(DialogInterface dialogInterface</span><span class="s2">, </span><span class="s0">int </span><span class="s1">i) {</span>
+
+                        <span class="s1">Calendar calendar = Calendar.getInstance()</span><span class="s2">;</span>
+                        <span class="s1">SimpleDateFormat simpleDateFormat = </span><span class="s0">new </span><span class="s1">SimpleDateFormat(</span><span class="s3">&quot;dd-MMM-yyyy, hh:mm a&quot;</span><span class="s1">)</span><span class="s2">;</span>
+                        <span class="s1">String date = simpleDateFormat.format(calendar.getTime())</span><span class="s2">;</span>
+
+                        <span class="s0">new </span><span class="s1">myDBHelper(user_data.</span><span class="s0">this</span><span class="s1">).insertTransferData(date</span><span class="s2">, </span><span class="s1">name.getText().toString()</span><span class="s2">, </span><span class="s3">&quot;Not selected&quot;</span><span class="s2">, </span><span class="s3">&quot;0&quot;</span><span class="s2">, </span><span class="s3">&quot;Failed&quot;</span><span class="s1">)</span><span class="s2">;</span>
+                        <span class="s1">Toast.makeText(user_data.</span><span class="s0">this</span><span class="s2">, </span><span class="s3">&quot;Transaction Cancelled!&quot;</span><span class="s2">, </span><span class="s1">Toast.LENGTH_LONG).show()</span><span class="s2">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}).setNegativeButton(</span><span class="s3">&quot;No&quot;</span><span class="s2">, </span><span class="s0">new </span><span class="s1">DialogInterface.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(DialogInterface dialog</span><span class="s2">, </span><span class="s0">int </span><span class="s1">which) {</span>
+                <span class="s1">dialog.dismiss()</span><span class="s2">;</span>
+                <span class="s1">enterAmount()</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s2">;</span>
+        <span class="s1">AlertDialog alertexit = builder_exitbutton.create()</span><span class="s2">;</span>
+        <span class="s1">alertexit.show()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+<span class="s1">}</span>
+
+</pre>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>view_holder.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ed864a;}
+.s1 { color: #ebebeb;}
+.s2 { color: #ed864a; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+view_holder.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.game.basicbankingapp</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.annotation.NonNull</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.RecyclerView</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">view_holder </span><span class="s0">extends </span><span class="s1">RecyclerView.ViewHolder {</span>
+
+    <span class="s1">TextView mName</span><span class="s2">, </span><span class="s1">mPhonenumber</span><span class="s2">, </span><span class="s1">mBalance</span><span class="s2">, </span><span class="s1">mRupee</span><span class="s2">, </span><span class="s1">mRupeeslash</span><span class="s2">, </span><span class="s1">mName1</span><span class="s2">, </span><span class="s1">mName2</span><span class="s2">, </span><span class="s1">mDate</span><span class="s2">, </span><span class="s1">mTransc_status</span><span class="s2">;</span>
+    <span class="s1">ImageView mPhone</span><span class="s2">, </span><span class="s1">mArrow</span><span class="s2">;</span>
+    <span class="s1">View mView</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">view_holder(@NonNull View itemView) {</span>
+        <span class="s0">super</span><span class="s1">(itemView)</span><span class="s2">;</span>
+        <span class="s1">mView = itemView</span><span class="s2">;</span>
+
+        <span class="s1">mName = itemView.findViewById(R.id.username)</span><span class="s2">;</span>
+        <span class="s1">mPhonenumber = itemView.findViewById(R.id.userphonenumber)</span><span class="s2">;</span>
+        <span class="s1">mBalance = itemView.findViewById(R.id.balance)</span><span class="s2">;</span>
+        <span class="s1">mRupee = itemView.findViewById(R.id.rupee)</span><span class="s2">;</span>
+        <span class="s1">mRupeeslash = itemView.findViewById(R.id.rupeeslash)</span><span class="s2">;</span>
+        <span class="s1">mPhone = itemView.findViewById(R.id.phone)</span><span class="s2">;</span>
+        <span class="s1">mName1 = itemView.findViewById(R.id.name1)</span><span class="s2">;</span>
+        <span class="s1">mName2 = itemView.findViewById(R.id.name2)</span><span class="s2">;</span>
+        <span class="s1">mDate = itemView.findViewById(R.id.date)</span><span class="s2">;</span>
+        <span class="s1">mArrow = itemView.findViewById(R.id.arrow)</span><span class="s2">;</span>
+        <span class="s1">mTransc_status = itemView.findViewById(R.id.transaction_status)</span><span class="s2">;</span>
+
+        <span class="s1">itemView.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View view) {</span>
+                <span class="s1">mClickListener.onItemClick(view</span><span class="s2">, </span><span class="s1">getAdapterPosition())</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s2">;</span>
+
+    <span class="s1">}</span>
+    <span class="s0">private </span><span class="s1">view_holder.ClickListener mClickListener</span><span class="s2">;</span>
+    <span class="s0">public interface  </span><span class="s1">ClickListener{</span>
+        <span class="s0">void </span><span class="s1">onItemClick(View view</span><span class="s2">, </span><span class="s0">int </span><span class="s1">position)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setOnClickListener(view_holder.ClickListener clickListener){</span>
+        <span class="s1">mClickListener = clickListener</span><span class="s2">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

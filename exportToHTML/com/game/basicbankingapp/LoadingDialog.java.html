@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>LoadingDialog.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ed864a;}
+.s1 { color: #ebebeb;}
+.s2 { color: #ed864a; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+LoadingDialog.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.game.basicbankingapp</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android.app.Activity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.app.AlertDialog</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.view.LayoutInflater</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">LoadingDialog {</span>
+
+   <span class="s0">private </span><span class="s1">Activity activity</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">AlertDialog dialog</span><span class="s2">;</span>
+
+    <span class="s1">LoadingDialog(Activity myActivity){</span>
+        <span class="s1">activity = myActivity</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">void </span><span class="s1">startLoadingDialog(){</span>
+        <span class="s1">AlertDialog.Builder builder = </span><span class="s0">new </span><span class="s1">AlertDialog.Builder(activity)</span><span class="s2">;</span>
+
+        <span class="s1">LayoutInflater inflater =activity.getLayoutInflater()</span><span class="s2">;</span>
+
+        <span class="s1">builder.setView(inflater.inflate(R.layout.custom_dialog</span><span class="s2">, </span><span class="s0">null</span><span class="s1">))</span><span class="s2">;</span>
+        <span class="s1">builder.setCancelable(</span><span class="s0">false</span><span class="s1">)</span><span class="s2">;</span>
+
+        <span class="s1">dialog = builder.create()</span><span class="s2">;</span>
+        <span class="s1">builder.show()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">void </span><span class="s1">dismissDialog(){</span>
+        <span class="s1">dialog.dismiss()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

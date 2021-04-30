@@ -1,0 +1,99 @@
+<html>
+<head>
+<title>cstomr_model.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ed864a;}
+.s1 { color: #ebebeb;}
+.s2 { color: #ed864a; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+cstomr_model.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.game.basicbankingapp</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">cstomr_model {</span>
+    <span class="s1">String phoneno</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">balance</span><span class="s2">, </span><span class="s1">name1</span><span class="s2">, </span><span class="s1">name2</span><span class="s2">, </span><span class="s1">date</span><span class="s2">, </span><span class="s1">transaction_status</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">cstomr_model() {</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">cstomr_model(String phoneno</span><span class="s2">, </span><span class="s1">String name</span><span class="s2">, </span><span class="s1">String balance) {</span>
+        <span class="s0">this</span><span class="s1">.phoneno = phoneno</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s1">.name = name</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s1">.balance = balance</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">cstomr_model(String name1</span><span class="s2">, </span><span class="s1">String name2</span><span class="s2">, </span><span class="s1">String balance</span><span class="s2">, </span><span class="s1">String date</span><span class="s2">, </span><span class="s1">String transaction_status) {</span>
+        <span class="s0">this</span><span class="s1">.name1 = name1</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s1">.name2 = name2</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s1">.balance = balance</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s1">.date = date</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s1">.transaction_status = transaction_status</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getPhoneno() {</span>
+        <span class="s0">return </span><span class="s1">phoneno</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setPhoneno(String phoneno) {</span>
+        <span class="s0">this</span><span class="s1">.phoneno = phoneno</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getName() {</span>
+        <span class="s0">return </span><span class="s1">name</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setName(String name) {</span>
+        <span class="s0">this</span><span class="s1">.name = name</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getBalance() {</span>
+        <span class="s0">return </span><span class="s1">balance</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setBalance(String balance) {</span>
+        <span class="s0">this</span><span class="s1">.balance = balance</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getName1() {</span>
+        <span class="s0">return </span><span class="s1">name1</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setName1(String name1) {</span>
+        <span class="s0">this</span><span class="s1">.name1 = name1</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getName2() {</span>
+        <span class="s0">return </span><span class="s1">name2</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setName2(String name2) {</span>
+        <span class="s0">this</span><span class="s1">.name2 = name2</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getDate() {</span>
+        <span class="s0">return </span><span class="s1">date</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setDate(String date) {</span>
+        <span class="s0">this</span><span class="s1">.date = date</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getTransaction_status() {</span>
+        <span class="s0">return </span><span class="s1">transaction_status</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setTransaction_status(String transaction_status) {</span>
+        <span class="s0">this</span><span class="s1">.transaction_status = transaction_status</span><span class="s2">;</span>
+        
+    <span class="s1">}</span>
+
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

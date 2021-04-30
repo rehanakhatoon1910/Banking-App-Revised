@@ -24,8 +24,7 @@ public class screen1 extends Activity {
         name = findViewById(R.id.name);
         app_name = findViewById(R.id.app_name);
         app_name1 = findViewById(R.id.app_name2);
-        i_view = findViewById(R.id.i_view);
-        i_view2 = findViewById(R.id.i_view2);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -45,8 +44,7 @@ public class screen1 extends Activity {
     }
 
     private void startEnterAnimation() {
-        i_view.startAnimation(AnimationUtils.loadAnimation(screen1.this, R.anim.top));
-        i_view2.startAnimation(AnimationUtils.loadAnimation(screen1.this, R.anim.fade));
+
         app_name.startAnimation(AnimationUtils.loadAnimation(screen1.this, R.anim.bottom));
         app_name1.startAnimation(AnimationUtils.loadAnimation(screen1.this, R.anim.bottom));
         logo.startAnimation(AnimationUtils.loadAnimation(screen1.this, R.anim.bottom));
@@ -56,7 +54,6 @@ public class screen1 extends Activity {
         name.setVisibility(View.VISIBLE);
         app_name.setVisibility(View.VISIBLE);
         app_name1.setVisibility(View.VISIBLE);
-        i_view.setVisibility(View.VISIBLE);
-        i_view2.setVisibility(View.VISIBLE);
+
     }
 }

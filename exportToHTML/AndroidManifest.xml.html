@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>AndroidManifest.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e8bf6a;}
+.s1 { color: #ffffff;}
+.s2 { color: #54b33e;}
+.s3 { color: #ebebeb;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+AndroidManifest.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;?</span><span class="s1">xml version</span><span class="s2">=&quot;1.0&quot; </span><span class="s1">encoding</span><span class="s2">=&quot;utf-8&quot;</span><span class="s0">?&gt;</span>
+<span class="s0">&lt;manifest </span><span class="s1">xmlns:android</span><span class="s2">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="s1">package</span><span class="s2">=&quot;com.game.basicbankingapp&quot;</span>
+    <span class="s1">android:versionCode</span><span class="s2">=&quot;1&quot;</span>
+    <span class="s1">android:versionName</span><span class="s2">=&quot;1.0&quot; </span><span class="s0">&gt;</span>
+
+    <span class="s0">&lt;uses-sdk</span>
+        <span class="s1">android:minSdkVersion</span><span class="s2">=&quot;26&quot;</span>
+        <span class="s1">android:targetSdkVersion</span><span class="s2">=&quot;30&quot; </span><span class="s0">/&gt;</span>
+
+    <span class="s0">&lt;application</span>
+        <span class="s1">android:allowBackup</span><span class="s2">=&quot;true&quot;</span>
+        <span class="s1">android:appComponentFactory</span><span class="s2">=&quot;androidx.core.app.CoreComponentFactory&quot;</span>
+        <span class="s1">android:debuggable</span><span class="s2">=&quot;true&quot;</span>
+        <span class="s1">android:extractNativeLibs</span><span class="s2">=&quot;false&quot;</span>
+        <span class="s1">android:icon</span><span class="s2">=&quot;@drawable/nw&quot;</span>
+        <span class="s1">android:label</span><span class="s2">=&quot;@string/app_name&quot;</span>
+        <span class="s1">android:roundIcon</span><span class="s2">=&quot;@drawable/nw&quot;</span>
+        <span class="s1">android:supportsRtl</span><span class="s2">=&quot;true&quot;</span>
+        <span class="s1">android:testOnly</span><span class="s2">=&quot;true&quot;</span>
+        <span class="s1">android:theme</span><span class="s2">=&quot;@style/AppTheme_white&quot; </span><span class="s0">&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.game.basicbankingapp.screen1&quot;</span>
+            <span class="s1">android:screenOrientation</span><span class="s2">=&quot;portrait&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@style/AppTheme.NoActionBar&quot; </span><span class="s0">&gt;</span>
+            <span class="s0">&lt;intent-filter&gt;</span>
+                <span class="s0">&lt;action </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.action.MAIN&quot; </span><span class="s0">/&gt;</span>
+
+                <span class="s0">&lt;category </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.category.LAUNCHER&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/intent-filter&gt;</span>
+        <span class="s0">&lt;/activity&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.game.basicbankingapp.MainActivity&quot;</span>
+            <span class="s1">android:screenOrientation</span><span class="s2">=&quot;portrait&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@style/AppTheme.NoActionBar&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.game.basicbankingapp.user_list&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;Banking System&quot;</span>
+            <span class="s1">android:screenOrientation</span><span class="s2">=&quot;portrait&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@style/AppTheme&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.game.basicbankingapp.user_data&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;User Details&quot;</span>
+            <span class="s1">android:parentActivityName</span><span class="s2">=&quot;com.game.basicbankingapp.user_list&quot;</span>
+            <span class="s1">android:screenOrientation</span><span class="s2">=&quot;portrait&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@style/AppTheme&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.game.basicbankingapp.send2user&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;Transfer Money&quot;</span>
+            <span class="s1">android:screenOrientation</span><span class="s2">=&quot;portrait&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@style/AppTheme&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;com.game.basicbankingapp.history_list&quot;</span>
+            <span class="s1">android:label</span><span class="s2">=&quot;Transactions&quot;</span>
+            <span class="s1">android:parentActivityName</span><span class="s2">=&quot;com.game.basicbankingapp.user_list&quot;</span>
+            <span class="s1">android:screenOrientation</span><span class="s2">=&quot;portrait&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@style/AppTheme&quot; </span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;/application&gt;</span>
+
+<span class="s0">&lt;/manifest&gt;</span></pre>
+</body>
+</html>

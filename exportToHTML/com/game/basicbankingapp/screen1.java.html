@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>screen1.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ed864a;}
+.s1 { color: #ebebeb;}
+.s2 { color: #ed864a; font-weight: bold;}
+.s3 { color: #33ccff; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+screen1.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.game.basicbankingapp</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android.app.Activity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.os.Handler</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.view.animation.AnimationUtils</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">screen1 </span><span class="s0">extends </span><span class="s1">Activity {</span>
+
+    <span class="s1">TextView designed</span><span class="s2">, </span><span class="s1">name</span><span class="s2">, </span><span class="s1">app_name</span><span class="s2">,</span><span class="s1">app_name1</span><span class="s2">,</span><span class="s1">i_view2</span><span class="s2">;</span>
+    <span class="s1">ImageView logo</span><span class="s2">, </span><span class="s1">i_view</span><span class="s2">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s2">;</span>
+        <span class="s1">setContentView(R.layout.screen1)</span><span class="s2">;</span>
+
+        <span class="s1">logo = findViewById(R.id.logo)</span><span class="s2">;</span>
+        <span class="s1">designed = findViewById(R.id.designed)</span><span class="s2">;</span>
+        <span class="s1">name = findViewById(R.id.name)</span><span class="s2">;</span>
+        <span class="s1">app_name = findViewById(R.id.app_name)</span><span class="s2">;</span>
+        <span class="s1">app_name1 = findViewById(R.id.app_name2)</span><span class="s2">;</span>
+
+        <span class="s0">new </span><span class="s1">Handler().postDelayed(</span><span class="s0">new </span><span class="s1">Runnable() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">run() {</span>
+                <span class="s1">startEnterAnimation()</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s2">, </span><span class="s3">2000</span><span class="s1">)</span><span class="s2">;</span>
+
+        <span class="s0">new </span><span class="s1">Handler().postDelayed(</span><span class="s0">new </span><span class="s1">Runnable() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">run() {</span>
+
+                <span class="s1">startActivity(</span><span class="s0">new </span><span class="s1">Intent(getApplicationContext()</span><span class="s2">, </span><span class="s1">MainActivity.</span><span class="s0">class</span><span class="s1">))</span><span class="s2">;</span>
+                <span class="s1">finish()</span><span class="s2">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span><span class="s2">, </span><span class="s3">5500</span><span class="s1">)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">startEnterAnimation() {</span>
+
+        <span class="s1">app_name.startAnimation(AnimationUtils.loadAnimation(screen1.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">R.anim.bottom))</span><span class="s2">;</span>
+        <span class="s1">app_name1.startAnimation(AnimationUtils.loadAnimation(screen1.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">R.anim.bottom))</span><span class="s2">;</span>
+        <span class="s1">logo.startAnimation(AnimationUtils.loadAnimation(screen1.</span><span class="s0">this</span><span class="s2">, </span><span class="s1">R.anim.bottom))</span><span class="s2">;</span>
+
+        <span class="s1">logo.setVisibility(View.VISIBLE)</span><span class="s2">;</span>
+        <span class="s1">designed.setVisibility(View.VISIBLE)</span><span class="s2">;</span>
+        <span class="s1">name.setVisibility(View.VISIBLE)</span><span class="s2">;</span>
+        <span class="s1">app_name.setVisibility(View.VISIBLE)</span><span class="s2">;</span>
+        <span class="s1">app_name1.setVisibility(View.VISIBLE)</span><span class="s2">;</span>
+
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

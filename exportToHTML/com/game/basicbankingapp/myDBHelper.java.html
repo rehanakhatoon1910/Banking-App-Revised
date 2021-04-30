@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>myDBHelper.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ed864a;}
+.s1 { color: #ebebeb;}
+.s2 { color: #ed864a; font-weight: bold;}
+.s3 { color: #54b33e;}
+.s4 { color: #33ccff; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+myDBHelper.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.game.basicbankingapp</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android.content.ContentValues</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.content.Context</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.database.Cursor</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteDatabase</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.database.sqlite.SQLiteOpenHelper</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.annotation.Nullable</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">myDBHelper </span><span class="s0">extends </span><span class="s1">SQLiteOpenHelper {</span>
+    <span class="s0">private </span><span class="s1">String TABLE_NAME = </span><span class="s3">&quot;user_table&quot;</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String TABLE_NAME1 = </span><span class="s3">&quot;transfers_table&quot;</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">myDBHelper(@Nullable Context context) {</span>
+        <span class="s0">super</span><span class="s1">(context</span><span class="s2">, </span><span class="s3">&quot;User.db&quot;</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">1</span><span class="s1">)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onCreate(SQLiteDatabase db) {</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;create table &quot; </span><span class="s1">+ TABLE_NAME +</span><span class="s3">&quot; (PHONENUMBER INTEGER PRIMARY KEY ,NAME TEXT,BALANCE DECIMAL,EMAIL VARCHAR,ACCOUNT_NO VARCHAR,IFSC_CODE VARCHAR)&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;create table &quot; </span><span class="s1">+ TABLE_NAME1 +</span><span class="s3">&quot; (TRANSACTIONID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,FROMNAME TEXT,TONAME TEXT,AMOUNT DECIMAL,STATUS TEXT)&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;insert into user_table values(7675123980,'John',472.00,'john.02@gmail.com','XXXXXXXXXXXX1231','ABC09876541')&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;insert into user_table values(7345417538,'Nick',582.67,'nick.143@gmail.com','XXXXXXXXXXXX5712','BCA782638423')&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;insert into user_table values(8456584784,'Angelina',1359.56,'angeli.2404@gmail.com','XXXXXXXXXXXX3417','CAB87654325')&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;insert into user_table values(6567886786,'Christopher',189.01,'christo.05@gmail.com','XXXXXXXXXXXX4124','ABC76543213')&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;insert into user_table values(9678901234,'Ellie',1603.48,'ellie.1506@gmail.com','XXXXXXXXXXXX2342','BCA65432108')&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;insert into user_table values(8789012345,'Jeff',945.16,'jeff.1107@gmail.com','XXXXXXXXXXXX3459','CAB54321099')&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;insert into user_table values(7890123456,'Briston',596.00,'briston.0809@gmail.com','XXXXXXXXXXXX4525','ABC43210984')&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;insert into user_table values(9901234567,'Viele',857.22,'viele.0910@gmail.com','XXXXXXXXXXXX5232','BCA32109879')&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;insert into user_table values(7012345678,'Mark',398.46,'mark.2000@gmail.com','XXXXXXXXXXXX3458','CAB21098766')&quot;</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;insert into user_table values(8234567809,'Peter',273.90,'peter.01@gmail.com','XXXXXXXXXXXX4560','ABC10987650')&quot;</span><span class="s1">)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onUpgrade(SQLiteDatabase db</span><span class="s2">, </span><span class="s0">int </span><span class="s1">oldVersion</span><span class="s2">, </span><span class="s0">int </span><span class="s1">newVersion) {</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;DROP TABLE IF EXISTS &quot;</span><span class="s1">+TABLE_NAME)</span><span class="s2">;</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;DROP TABLE IF EXISTS &quot;</span><span class="s1">+TABLE_NAME1)</span><span class="s2">;</span>
+        <span class="s1">onCreate(db)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Cursor readalldata(){</span>
+        <span class="s1">SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span>
+        <span class="s1">Cursor cursor = db.rawQuery(</span><span class="s3">&quot;select * from user_table&quot;</span><span class="s2">, </span><span class="s0">null</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s0">return </span><span class="s1">cursor</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Cursor readparticulardata(String phonenumber){</span>
+        <span class="s1">SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span>
+        <span class="s1">Cursor cursor = db.rawQuery(</span><span class="s3">&quot;select * from user_table where phonenumber = &quot; </span><span class="s1">+phonenumber</span><span class="s2">, </span><span class="s0">null</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s0">return </span><span class="s1">cursor</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Cursor readselectuserdata(String phonenumber) {</span>
+        <span class="s1">SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span>
+        <span class="s1">Cursor cursor = db.rawQuery(</span><span class="s3">&quot;select * from user_table except select * from user_table where phonenumber = &quot; </span><span class="s1">+phonenumber</span><span class="s2">, </span><span class="s0">null</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s0">return </span><span class="s1">cursor</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">updateAmount(String phonenumber</span><span class="s2">, </span><span class="s1">String amount){</span>
+        <span class="s1">SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span>
+        <span class="s1">db.execSQL(</span><span class="s3">&quot;update user_table set balance = &quot; </span><span class="s1">+ amount + </span><span class="s3">&quot; where phonenumber = &quot; </span><span class="s1">+phonenumber)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Cursor readtransferdata(){</span>
+        <span class="s1">SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span>
+        <span class="s1">Cursor cursor = db.rawQuery(</span><span class="s3">&quot;select * from transfers_table&quot;</span><span class="s2">, </span><span class="s0">null</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s0">return </span><span class="s1">cursor</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">insertTransferData(String date</span><span class="s2">,</span><span class="s1">String from_name</span><span class="s2">, </span><span class="s1">String to_name</span><span class="s2">, </span><span class="s1">String amount</span><span class="s2">, </span><span class="s1">String status){</span>
+        <span class="s1">SQLiteDatabase db = </span><span class="s0">this</span><span class="s1">.getWritableDatabase()</span><span class="s2">;</span>
+        <span class="s1">ContentValues contentValues = </span><span class="s0">new </span><span class="s1">ContentValues()</span><span class="s2">;</span>
+        <span class="s1">contentValues.put(</span><span class="s3">&quot;DATE&quot;</span><span class="s2">, </span><span class="s1">date)</span><span class="s2">;</span>
+        <span class="s1">contentValues.put(</span><span class="s3">&quot;FROMNAME&quot;</span><span class="s2">, </span><span class="s1">from_name)</span><span class="s2">;</span>
+        <span class="s1">contentValues.put(</span><span class="s3">&quot;TONAME&quot;</span><span class="s2">, </span><span class="s1">to_name)</span><span class="s2">;</span>
+        <span class="s1">contentValues.put(</span><span class="s3">&quot;AMOUNT&quot;</span><span class="s2">, </span><span class="s1">amount)</span><span class="s2">;</span>
+        <span class="s1">contentValues.put(</span><span class="s3">&quot;STATUS&quot;</span><span class="s2">, </span><span class="s1">status)</span><span class="s2">;</span>
+        <span class="s1">Long result = db.insert(TABLE_NAME1</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s1">contentValues)</span><span class="s2">;</span>
+        <span class="s0">if</span><span class="s1">(result == -</span><span class="s4">1</span><span class="s1">){</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+            <span class="s0">return true</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

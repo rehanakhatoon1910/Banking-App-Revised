@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>adapter_History.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ed864a;}
+.s1 { color: #ebebeb;}
+.s2 { color: #ed864a; font-weight: bold;}
+.s3 { color: #54b33e;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+adapter_History.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.game.basicbankingapp</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.content.Context</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.graphics.Color</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.view.LayoutInflater</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.view.ViewGroup</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.annotation.NonNull</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.RecyclerView</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">adapter_History </span><span class="s0">extends </span><span class="s1">RecyclerView.Adapter&lt;view_holder&gt; {</span>
+
+    <span class="s1">history_list HistoryList</span><span class="s2">;</span>
+    <span class="s1">List&lt;cstomr_model&gt; cstomrmodelList</span><span class="s2">;</span>
+    <span class="s1">Context context</span><span class="s2">;</span>
+
+    <span class="s1">TextView mTransc_status</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">adapter_History(history_list historyList</span><span class="s2">, </span><span class="s1">List&lt;cstomr_model&gt; cstomrmodelList) {</span>
+        <span class="s0">this</span><span class="s1">.HistoryList = historyList</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s1">.cstomrmodelList = cstomrmodelList</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@NonNull</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">view_holder onCreateViewHolder(@NonNull ViewGroup parent</span><span class="s2">, </span><span class="s0">int </span><span class="s1">viewType) {</span>
+
+        <span class="s1">View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.trnsfr_historylist</span><span class="s2">, </span><span class="s1">parent</span><span class="s2">, </span><span class="s0">false</span><span class="s1">)</span><span class="s2">;</span>
+
+        <span class="s1">mTransc_status = itemView.findViewById(R.id.transaction_status)</span><span class="s2">;</span>
+
+        <span class="s1">view_holder viewholder = </span><span class="s0">new </span><span class="s1">view_holder(itemView)</span><span class="s2">;</span>
+        <span class="s1">viewholder.setOnClickListener(</span><span class="s0">new </span><span class="s1">view_holder.ClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onItemClick(View view</span><span class="s2">, </span><span class="s0">int </span><span class="s1">position) {</span>
+
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s2">;</span>
+
+        <span class="s0">return </span><span class="s1">viewholder</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onBindViewHolder(@NonNull view_holder holder</span><span class="s2">, </span><span class="s0">int </span><span class="s1">position) {</span>
+        <span class="s1">holder.mName1.setText(cstomrmodelList.get(position).getName1())</span><span class="s2">;</span>
+        <span class="s1">holder.mName2.setText(cstomrmodelList.get(position).getName2())</span><span class="s2">;</span>
+        <span class="s1">holder.mBalance.setText(cstomrmodelList.get(position).getBalance())</span><span class="s2">;</span>
+        <span class="s1">holder.mDate.setText(cstomrmodelList.get(position).getDate())</span><span class="s2">;</span>
+        <span class="s1">holder.mTransc_status.setText(cstomrmodelList.get(position).getTransaction_status())</span><span class="s2">;</span>
+
+        <span class="s0">if</span><span class="s1">(cstomrmodelList.get(position).getTransaction_status().equals(</span><span class="s3">&quot;Failed!!!&quot;</span><span class="s1">)){</span>
+            <span class="s1">holder.mTransc_status.setTextColor(Color.parseColor(</span><span class="s3">&quot;#FF0000&quot;</span><span class="s1">))</span><span class="s2">;</span>
+        <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+            <span class="s1">holder.mTransc_status.setTextColor(Color.RED)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public int </span><span class="s1">getItemCount() {</span>
+        <span class="s0">return </span><span class="s1">cstomrmodelList.size()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>
